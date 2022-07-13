@@ -1,6 +1,6 @@
 [Unit]
 Description=defined
-Wants=basic.target
+ต้องการ=basic.target
 After=basic.target network.target
 Before=sshd.service
 
@@ -10,7 +10,7 @@ StandardOutput=syslog
 StandardError=syslog
 ExecReload=/bin/kill -HUP $MAINPID
 ExecStart=/etc/defined/dnclient run
-Restart=always
+รีสตาร์ท=เสมอ
 
-[Install]
+[ติดตั้ง]
 WantedBy=multi-user.target
