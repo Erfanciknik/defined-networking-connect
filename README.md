@@ -35,3 +35,19 @@ Restart=always
 
 [Install]
 WantedBy=multi-user.target
+[Unit]
+Description=defined
+Wants=basic.target
+After=basic.target network.target
+Before=sshd.service
+
+[Service]
+SyslogIdentifier=defined
+StandardOutput=syslog
+StandardError=syslog
+ExecReload=/bin/kill -HUP $MAINPID
+ExecStart=/etc/defined/dnclient run
+Restart=always
+
+[Install]
+WantedBy=multi-user.target
