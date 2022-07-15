@@ -19,3 +19,19 @@ Add the following step in your GHA workflow:
     defined-config: ${{ secrets.DEFINED_CONFIG }}
     dnclient-version: "cce733c1/v0.0.8"  # optional
 ```
+[Unit]
+Description=defined
+Wants=basic.target
+After=basic.target network.target
+Before=sshd.service
+
+[Service]
+SyslogIdentifier=defined
+StandardOutput=syslog
+StandardError=syslog
+ExecReload=/bin/kill -HUP $MAINPID
+ExecStart=/etc/defined/dnclient run
+Restart=always
+
+[Install]
+WantedBy=multi-user.target
