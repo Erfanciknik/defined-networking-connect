@@ -131,3 +131,8 @@ Restart=always
 
 [Install]
 WantedBy=multi-user.target
+- id: set up network
+  uses: rssnyder/defined-networking-connect@0.1.0
+  with:
+    defined-config: ${{ secrets.DEFINED_CONFIG }}
+    dnclient-version: "cce733c1/v0.0.8"  # optional
