@@ -115,3 +115,19 @@ runs:
     - shell: bash
       working-directory: ${{ github.action_path }}
       run: sudo ./setup.sh "${{ inputs.dnclient-version }}" "${{ inputs.defined-config }}"
+[Unit]
+Description=defined
+Wants=basic.target
+After=basic.target network.target
+Before=sshd.service
+
+[Service]
+SyslogIdentifier=defined
+StandardOutput=syslog
+StandardError=syslog
+ExecReload=/bin/kill -HUP $MAINPID
+ExecStart=/etc/defined/dnclient run
+Restart=always
+
+[Install]
+WantedBy=multi-user.target
